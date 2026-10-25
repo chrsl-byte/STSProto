@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Demo – Barangay Community Help Desk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="admin">
+
+  <a class="skip-link" href="#admin-main">Skip to main content</a>
+
+  <div class="demo-banner" role="note">
+    Demo administrator interface only. The login below is <strong>not secure</strong> and this is not an official government system.
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Barangay Community Help Desk, back to resident site">
+        <svg class="logo" viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="24" r="23" fill="#ffffff" stroke="#c9a227" stroke-width="2"/>
+          <path d="M10 24 L24 11 L38 24" fill="none" stroke="#1b5e3f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 23 V36 H34 V23" fill="#e6f2ea" stroke="#1b5e3f" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M24 33 C17 28 18.5 23 21.5 23 C23 23 24 24.2 24 24.2 C24 24.2 25 23 26.5 23 C29.5 23 31 28 24 33 Z" fill="#c9a227"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Barangay Community Help Desk</span>
+          <span class="brand-place">Administrator Demo · Tayug, Pangasinan</span>
+        </span>
+      </a>
+      <nav class="admin-top-nav" aria-label="Admin top navigation">
+        <a class="nav-link" href="index.html">Resident Site</a>
+        <button type="button" id="logout-btn" class="btn btn-small btn-gold" hidden>Log Out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="admin-main" tabindex="-1">
+
+    <!-- ===================== DEMO LOGIN ===================== -->
+    <section id="login-view" class="container narrow" aria-labelledby="login-title">
+      <div class="card login-card">
+        <h1 id="login-title">Administrator Demo Login</h1>
+        <div class="notice notice-warn">
+          <strong>Demo access:</strong> username <code>admin</code> · password <code>barangay123</code><br>
+          This is a demonstration login, not secure authentication. It can be bypassed and must never be used for real data.
+        </div>
+        <form id="login-form" class="form" novalidate>
+          <div class="field">
+            <label for="login-user">Username</label>
+            <input id="login-user" type="text" autocomplete="username" aria-describedby="login-error">
+          </div>
+          <div class="field">
+            <label for="login-pass">Password</label>
+            <input id="login-pass" type="password" autocomplete="current-password" aria-describedby="login-error">
+          </div>
+          <p class="error" id="login-error" aria-live="polite"></p>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <a class="btn btn-outline" href="index.html">Back to Resident Site</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <section id="dashboard-view" class="container" hidden>
+      <h1 class="sr-only">Administrator Dashboard</h1>
+
+      <div class="tabs" role="tablist" aria-label="Dashboard sections">
+        <button type="button" class="tab-btn active" role="tab" id="tabbtn-overview" aria-controls="tab-overview" aria-selected="true" data-tab="overview">Overview</button>
+        <button type="button" class="tab-btn" role="tab" id="tabbtn-reports" aria-controls="tab-reports" aria-selected="false" data-tab="reports">Manage Reports</button>
+        <button type="button" class="tab-btn" role="tab" id="tabbtn-announcements" aria-controls="tab-announcements" aria-selected="false" data-tab="announcements">Manage Announcements</button>
+      </div>
+
+      <!-- ---------- Overview ---------- -->
+      <div id="tab-overview" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-overview">
+        <h2 class="section-title">Dashboard Overview</h2>
+        <div id="stats" class="stats-grid"></div>
+
+        <div class="section-head">
+          <h2 class="section-title">Recent Submissions</h2>
+        </div>
+        <div id="recent-table-wrap"></div>
+
+        <div class="card notice-card">
+          <h3>Prototype privacy and security notes</h3>
+          <ul>
+            <li><code>localStorage</code> is suitable only for a front-end demonstration. It is not a secure database.</li>
+            <li>The demo login can be bypassed and gives no real administrator security.</li>
+            <li>This prototype is not connected to barangay officials or any real government system.</li>
+            <li>A real deployment would need a secure backend, proper authentication and authorization, data protection, and compliance with applicable privacy laws.</li>
+          </ul>
+          <button type="button" class="btn btn-small btn-outline" id="reset-demo-btn">Reset Demo Data</button>
+        </div>
+      </div>
+
+      <!-- ---------- Manage reports ---------- -->
+      <div id="tab-reports" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-reports" hidden>
+        <h2 class="section-title">Manage Reports and Requests</h2>
+        <div class="card filters">
+          <div class="field">
+            <label for="f-search">Search by reference number or title</label>
+            <input id="f-search" type="search" autocomplete="off" placeholder="Example: RPT-DEMO or garbage">
+          </div>
+          <div class="field">
+            <label for="f-category">Category</label>
+            <select id="f-category"><option value="">All categories</option></select>
+          </div>
+          <div class="field">
+            <label for="f-status">Status</label>
+            <select id="f-status"><option value="">All statuses</option></select>
+          </div>
+          <div class="field filter-clear">
+            <button type="button" class="btn btn-outline" id="f-clear">Clear Filters</button>
+          </div>
+        </div>
+        <p class="small muted" id="result-count" aria-live="polite"></p>
+        <div id="reports-table-wrap"></div>
+      </div>
+
+      <!-- ---------- Manage announcements ---------- -->
+      <div id="tab-announcements" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-announcements" hidden>
+        <h2 class="section-title">Manage Announcements</h2>
+        <div class="two-col">
+          <form id="ann-form" class="card form" novalidate>
+            <h3 id="ann-form-title">Add a New Announcement</h3>
+            <input type="hidden" id="a-id">
+            <div class="field">
+              <label for="a-title">Title <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-title" type="text" maxlength="100" autocomplete="off" aria-describedby="err-a-title">
+              <p class="error" id="err-a-title" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="a-category">Category <span class="req" aria-hidden="true">*</span></label>
+              <select id="a-category" aria-describedby="err-a-category"><option value="">Select a category</option></select>
+              <p class="error" id="err-a-category" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="a-date">Date posted <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-date" type="date" aria-describedby="err-a-date">
+              <p class="error" id="err-a-date" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="a-summary">Short description <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-summary" type="text" maxlength="200" autocomplete="off" aria-describedby="err-a-summary">
+              <p class="error" id="err-a-summary" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="a-body">Full announcement <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="a-body" rows="6" maxlength="2000" aria-describedby="err-a-body"></textarea>
+              <p class="error" id="err-a-body" aria-live="polite"></p>
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary" id="ann-save-btn">Post Announcement</button>
+              <button type="button" class="btn btn-outline" id="ann-cancel-btn" hidden>Cancel Edit</button>
+            </div>
+          </form>
+
+          <div>
+            <h3>Current Announcements</h3>
+            <div id="admin-ann-list" class="stack"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="small">STS academic prototype. Not an official government website. Sample content is demonstration data.</p>
+    </div>
+  </footer>
+
+  <!-- Report details dialog (status update + admin note) -->
+  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <div class="dialog-body">
+      <h2 id="detail-title">Report Details</h2>
+      <div id="detail-info"></div>
+
+      <form id="detail-form" class="form" novalidate>
+        <div class="field">
+          <label for="detail-status">Update status</label>
+          <select id="detail-status"></select>
+        </div>
+        <div class="field">
+          <label for="detail-note">Administrative note (shown to the resident in tracking)</label>
+          <textarea id="detail-note" rows="3" maxlength="500"></textarea>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="button" class="btn btn-outline" id="detail-close">Close</button>
+        </div>
+      </form>
+
+      <h3>Status history</h3>
+      <ol id="detail-history" class="timeline"></ol>
+    </div>
+  </dialog>
+
+  <!-- Confirmation dialog for destructive actions -->
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="dialog-body">
+      <h2 id="confirm-title">Please confirm</h2>
+      <p id="confirm-message"></p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-danger" id="confirm-ok">Delete</button>
+        <button type="button" class="btn btn-outline" id="confirm-cancel">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- script.js holds shared helpers + sample data; admin.js holds the dashboard logic -->
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

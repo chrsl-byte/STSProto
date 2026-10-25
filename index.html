@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barangay Community Help Desk – Tayug, Pangasinan (Prototype)</title>
+    <meta
+      name="description"
+      content="Academic prototype of a barangay community concern and request management system for Tayug, Pangasinan."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-page="resident">
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- Prototype banner: always visible so nobody mistakes this for an official service -->
+    <div class="demo-banner" role="note">
+      Academic prototype for demonstration only. This is <strong>not</strong> an
+      official barangay or government service.
+    </div>
+
+    <!-- ===================== HEADER & NAVIGATION ===================== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          class="brand"
+          href="#home"
+          aria-label="Barangay Community Help Desk, go to home"
+        >
+          <!-- Simple community-service logo: a house with a heart (inline SVG, no external files) -->
+          <svg
+            class="logo"
+            viewBox="0 0 48 48"
+            width="44"
+            height="44"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle
+              cx="24"
+              cy="24"
+              r="23"
+              fill="#ffffff"
+              stroke="#c9a227"
+              stroke-width="2"
+            />
+            <path
+              d="M10 24 L24 11 L38 24"
+              fill="none"
+              stroke="#1b5e3f"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 23 V36 H34 V23"
+              fill="#e6f2ea"
+              stroke="#1b5e3f"
+              stroke-width="3"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M24 33 C17 28 18.5 23 21.5 23 C23 23 24 24.2 24 24.2 C24 24.2 25 23 26.5 23 C29.5 23 31 28 24 33 Z"
+              fill="#c9a227"
+            />
+          </svg>
+          <span class="brand-text">
+            <span class="brand-name">Barangay Community Help Desk</span>
+            <span class="brand-place">Tayug, Pangasinan</span>
+          </span>
+        </a>
+
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="sr-only">Toggle navigation menu</span>
+        </button>
+
+        <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="#home">Home</a>
+          <a class="nav-link" href="#submit">Submit a Concern</a>
+          <a class="nav-link" href="#request">Request Assistance</a>
+          <a class="nav-link" href="#track">Track My Report</a>
+          <a class="nav-link" href="#announcements">Announcements</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link nav-admin" href="admin.html">Admin (Demo)</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- ===================== A. HOME ===================== -->
+      <section id="home" class="page-section" aria-labelledby="home-title">
+        <div class="hero">
+          <div class="container hero-inner">
+            <p class="eyebrow">Tayug, Pangasinan</p>
+            <h1 id="home-title">Barangay Community Help Desk</h1>
+            <p class="hero-text">
+              Welcome! This website prototype shows how residents could report
+              community concerns, ask for barangay assistance, follow the
+              progress of their reports, and read local announcements in one
+              organized place.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-gold" href="#submit">Submit a Concern</a>
+              <a class="btn btn-light" href="#request">Request Assistance</a>
+              <a class="btn btn-outline-light" href="#track">Track My Report</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="notice notice-info">
+            <strong>About this system:</strong> The Barangay Community Help Desk
+            is a proposed system that gives residents a simple way to send
+            concerns (like garbage, roads, drainage, streetlights, and flooding)
+            and lets barangay officials review reports, update their status, and
+            post announcements. This version is a front-end demonstration that
+            runs only in your browser.
+          </div>
+
+          <h2 class="section-title">How It Works</h2>
+          <ol class="steps">
+            <li class="step">
+              <span class="step-num" aria-hidden="true">1</span>
+              <h3>Submit</h3>
+              <p>Fill out the concern or assistance form.</p>
+            </li>
+            <li class="step">
+              <span class="step-num" aria-hidden="true">2</span>
+              <h3>Get a Reference Number</h3>
+              <p>Keep the number shown after submitting.</p>
+            </li>
+            <li class="step">
+              <span class="step-num" aria-hidden="true">3</span>
+              <h3>Review &amp; Update</h3>
+              <p>An administrator reviews it and updates the status.</p>
+            </li>
+            <li class="step">
+              <span class="step-num" aria-hidden="true">4</span>
+              <h3>Track</h3>
+              <p>Enter your reference number to see progress.</p>
+            </li>
+          </ol>
+
+          <div class="two-col">
+            <div>
+              <div class="section-head">
+                <h2 class="section-title">Recent Announcements</h2>
+                <a class="text-link" href="#announcements">View all</a>
+              </div>
+              <div id="home-announcements" class="stack"></div>
+            </div>
+            <div>
+              <div class="section-head">
+                <h2 class="section-title">Example Community Concerns</h2>
+                <a class="text-link" href="#track">Track a report</a>
+              </div>
+              <p class="small muted">
+                Demonstration data only. Statuses change when an administrator
+                updates them.
+              </p>
+              <div id="home-concerns" class="stack"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== B. SUBMIT A CONCERN ===================== -->
+      <section id="submit" class="page-section" aria-labelledby="submit-title">
+        <div class="container narrow">
+          <h1 id="submit-title">Submit a Concern</h1>
+          <p class="lead">
+            Report a community problem such as garbage, damaged roads, drainage,
+            streetlights, or flooding.
+          </p>
+          <div class="notice notice-warn">
+            <strong>Prototype notice:</strong> Your report is saved only in this
+            browser. It is <strong>not</strong> sent to any barangay official.
+            Please do not enter real personal information.
+          </div>
+
+          <!-- Shown after a successful submission -->
+          <div
+            id="concern-success"
+            class="success-panel"
+            role="status"
+            tabindex="-1"
+            hidden
+          >
+            <h2>Concern saved (demo)</h2>
+            <p>Your reference number is:</p>
+            <p class="ref-big" id="concern-success-ref"></p>
+            <p class="small">
+              Write this number down. You can use it in
+              <strong>Track My Report</strong>.
+            </p>
+            <div class="btn-row">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="concern-track-btn"
+                data-track-ref=""
+              >
+                Track This Report
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="concern-another-btn"
+              >
+                Submit Another Concern
+              </button>
+            </div>
+          </div>
+
+          <form id="concern-form" class="card form" novalidate>
+            <div class="field">
+              <label for="concern-title"
+                >Report title
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <input
+                id="concern-title"
+                name="title"
+                type="text"
+                maxlength="100"
+                autocomplete="off"
+                aria-describedby="err-concern-title"
+                placeholder="Example: Garbage piled near the sample drainage canal"
+              />
+              <p class="error" id="err-concern-title" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="concern-category"
+                >Concern category
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <select
+                id="concern-category"
+                name="category"
+                aria-describedby="err-concern-category"
+              >
+                <option value="">Select a category</option>
+              </select>
+              <p class="error" id="err-concern-category" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="concern-description"
+                >Description of the problem
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <textarea
+                id="concern-description"
+                name="description"
+                rows="5"
+                maxlength="1000"
+                aria-describedby="err-concern-description hint-concern-description"
+                placeholder="Describe what is happening, since when, and who may be affected."
+              ></textarea>
+              <p class="hint" id="hint-concern-description">
+                At least 15 characters. Do not include private details such as
+                ID numbers.
+              </p>
+              <p
+                class="error"
+                id="err-concern-description"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <div class="field">
+              <label for="concern-location"
+                >Location or specific area affected
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <input
+                id="concern-location"
+                name="location"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                aria-describedby="err-concern-location"
+                placeholder="Example: Demo Purok 3, near the sample chapel"
+              />
+              <p class="error" id="err-concern-location" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="concern-date">Date of report</label>
+              <input
+                id="concern-date"
+                name="date"
+                type="date"
+                readonly
+                aria-describedby="hint-concern-date"
+              />
+              <p class="hint" id="hint-concern-date">
+                Filled in automatically with today's date.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="concern-image">Photo (optional)</label>
+              <input
+                id="concern-image"
+                name="image"
+                type="file"
+                accept="image/*"
+                aria-describedby="hint-concern-image err-concern-image"
+              />
+              <p class="hint" id="hint-concern-image">
+                Preview only for demonstration. The image is not uploaded or
+                saved.
+              </p>
+              <p class="error" id="err-concern-image" aria-live="polite"></p>
+              <div id="image-preview-wrap" class="image-preview" hidden>
+                <img id="image-preview" alt="Preview of the selected photo" />
+                <button
+                  type="button"
+                  class="btn btn-small btn-outline"
+                  id="image-remove-btn"
+                >
+                  Remove photo
+                </button>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary">
+                Submit Concern
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="concern-clear-btn"
+              >
+                Clear Form
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===================== C. REQUEST ASSISTANCE ===================== -->
+      <section
+        id="request"
+        class="page-section"
+        aria-labelledby="request-title"
+      >
+        <div class="container narrow">
+          <h1 id="request-title">Request Assistance</h1>
+          <p class="lead">
+            Ask about general assistance, community services, or other
+            barangay-related matters.
+          </p>
+          <div class="notice notice-warn">
+            <strong>Prototype notice:</strong> Your request is saved only in
+            this browser. It has <strong>not</strong>
+            been received by the barangay or any government office.
+          </div>
+
+          <div
+            id="request-success"
+            class="success-panel"
+            role="status"
+            tabindex="-1"
+            hidden
+          >
+            <h2>Request saved (demo)</h2>
+            <p>Your reference number is:</p>
+            <p class="ref-big" id="request-success-ref"></p>
+            <p class="small">
+              This is a demonstration only. No official barangay office has
+              received this request.
+            </p>
+            <div class="btn-row">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="request-track-btn"
+                data-track-ref=""
+              >
+                Track This Request
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="request-another-btn"
+              >
+                Submit Another Request
+              </button>
+            </div>
+          </div>
+
+          <form id="request-form" class="card form" novalidate>
+            <div class="field">
+              <label for="request-title-input"
+                >Request title
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <input
+                id="request-title-input"
+                name="title"
+                type="text"
+                maxlength="100"
+                autocomplete="off"
+                aria-describedby="err-request-title-input"
+                placeholder="Example: Question about community clean-up volunteering"
+              />
+              <p
+                class="error"
+                id="err-request-title-input"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <div class="field">
+              <label for="request-type"
+                >Type of assistance
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <select
+                id="request-type"
+                name="type"
+                aria-describedby="err-request-type"
+              >
+                <option value="">Select a type</option>
+              </select>
+              <p class="error" id="err-request-type" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="request-description"
+                >Description
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <textarea
+                id="request-description"
+                name="description"
+                rows="5"
+                maxlength="1000"
+                aria-describedby="err-request-description"
+                placeholder="Explain what kind of help you need."
+              ></textarea>
+              <p
+                class="error"
+                id="err-request-description"
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <div class="field">
+              <label for="request-method"
+                >Preferred contact method
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <select
+                id="request-method"
+                name="method"
+                aria-describedby="err-request-method"
+              >
+                <option value="">Select a contact method</option>
+              </select>
+              <p class="error" id="err-request-method" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="request-contact"
+                >Contact information (optional)</label
+              >
+              <input
+                id="request-contact"
+                name="contact"
+                type="text"
+                maxlength="80"
+                autocomplete="off"
+                aria-describedby="hint-request-contact err-request-contact"
+                placeholder="Use a fictional number or email for this demo"
+              />
+              <p class="hint" id="hint-request-contact">
+                Not shown publicly. Provide only what is necessary. Please use
+                fictional details in this demo.
+              </p>
+              <p class="error" id="err-request-contact" aria-live="polite"></p>
+            </div>
+
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary">
+                Submit Request
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline"
+                id="request-clear-btn"
+              >
+                Clear Form
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===================== D. TRACK MY REPORT ===================== -->
+      <section id="track" class="page-section" aria-labelledby="track-title">
+        <div class="container narrow">
+          <h1 id="track-title">Track My Report or Request</h1>
+          <p class="lead">
+            Enter the reference number you received after submitting.
+          </p>
+
+          <form id="track-form" class="card form" novalidate>
+            <div class="field">
+              <label for="track-ref">Reference number</label>
+              <div class="inline-form">
+                <input
+                  id="track-ref"
+                  name="ref"
+                  type="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  placeholder="Example: RPT-DEMO-0001"
+                  aria-describedby="hint-track-ref"
+                />
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+              <p class="hint" id="hint-track-ref">
+                Try the demo number
+                <button
+                  type="button"
+                  class="link-btn"
+                  data-track-ref="RPT-DEMO-0003"
+                >
+                  RPT-DEMO-0003
+                </button>
+                to see a sample timeline.
+              </p>
+            </div>
+          </form>
+
+          <div id="track-result" aria-live="polite"></div>
+
+          <h2 class="section-title">My Submissions on This Device</h2>
+          <div id="my-submissions" class="stack"></div>
+        </div>
+      </section>
+
+      <!-- ===================== E. ANNOUNCEMENTS ===================== -->
+      <section
+        id="announcements"
+        class="page-section"
+        aria-labelledby="ann-title"
+      >
+        <div class="container">
+          <h1 id="ann-title">Barangay Announcements</h1>
+          <p class="lead">
+            Sample announcements for demonstration. They are fictional and not
+            official notices.
+          </p>
+          <div class="filter-row">
+            <label for="ann-filter">Filter by category</label>
+            <select id="ann-filter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div id="announcement-list" class="card-grid"></div>
+        </div>
+      </section>
+
+      <!-- ===================== F. ABOUT ===================== -->
+      <section id="about" class="page-section" aria-labelledby="about-title">
+        <div class="container narrow">
+          <h1 id="about-title">About the System</h1>
+
+          <div class="card prose">
+            <h2>Purpose</h2>
+            <p>
+              This prototype supports our Science, Technology, and Society (STS)
+              project,
+              <em
+                >“A Proposed Barangay Community Concern and Request Management
+                System for Tayug, Pangasinan.”</em
+              >
+              It demonstrates how technology could make it easier to report
+              community problems and follow their progress.
+            </p>
+
+            <h2>Intended Users</h2>
+            <ul>
+              <li>
+                <strong>Residents</strong> who want to report concerns, request
+                assistance, track progress, and read announcements.
+              </li>
+              <li>
+                <strong>Barangay officials</strong> who would review reports,
+                update their status, and post announcements.
+              </li>
+            </ul>
+
+            <h2>How It Aims to Help</h2>
+            <p>
+              When concerns arrive through many different channels, they can be
+              hard to organize and follow up. A single system could give every
+              report a reference number, a clear status, and a visible history,
+              which may improve communication between residents and barangay
+              officials and help the community see which concerns are being
+              handled.
+            </p>
+          </div>
+
+          <div class="card prose">
+            <h2>Privacy Notice</h2>
+            <ul>
+              <li>
+                Provide only the information that is necessary. Do not enter
+                real names, addresses, or contact numbers in this demo.
+              </li>
+              <li>
+                This is a demonstration prototype and is <strong>not</strong> an
+                official reporting channel.
+              </li>
+              <li>
+                Data is saved with your browser's <code>localStorage</code>. It
+                stays on this device and is not a secure database.
+              </li>
+              <li>
+                The administrator login is a demo only. It can be bypassed and
+                does not provide real security.
+              </li>
+              <li>
+                This prototype is not connected to any barangay official or
+                government system.
+              </li>
+              <li>
+                A real deployment would need a secure backend, proper
+                authentication and authorization, data protection, and
+                compliance with applicable laws such as the Data Privacy Act of
+                2012 (Republic Act No. 10173).
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p><strong>Barangay Community Help Desk</strong> · Tayug, Pangasinan</p>
+        <p class="small">
+          STS academic prototype. Not an official government website. Sample
+          content is demonstration data.
+        </p>
+        <p class="small">
+          <a href="admin.html">Administrator demo login</a> ·
+          <a href="#about">Privacy notice</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Full announcement viewer -->
+    <dialog id="ann-dialog" aria-labelledby="ann-dialog-title">
+      <article class="dialog-body">
+        <p class="small muted" id="ann-dialog-meta"></p>
+        <h2 id="ann-dialog-title"></h2>
+        <div id="ann-dialog-text" class="prose"></div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" id="ann-dialog-close">
+            Close
+          </button>
+        </div>
+      </article>
+    </dialog>
+
+    <!-- Notifications appear here -->
+    <div
+      id="toast-region"
+      class="toast-region"
+      aria-live="polite"
+      aria-atomic="false"
+    ></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
